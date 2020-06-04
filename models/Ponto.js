@@ -8,8 +8,18 @@ const fecharPonto = (ponto) => {
 	fs.writeFileSync("ponto.json", JSON.stringify(ponto));
 };
 
-function listarPonto() {
-	return ponto;
+function listarPonto(matricula) {
+	let existe = ponto.filter((busca) => busca.matricula == matricula);
+	if (existe.length > 0){
+		return existe[existe.length - 1]
+	} else {
+		console.log("Ponto não encontrado")
+	}
+}
+
+function currentTime(date) {
+	var newDate = new Date(date.getTime() - date.getTimezoneOffset()*60*1000);
+	return newDate;
 }
 
 function salvarCheckin(matricula) {
@@ -20,7 +30,7 @@ function salvarCheckin(matricula) {
 		let checkin = new Date();
 		let novoPonto = {
 			matricula,
-			checkin,
+			checkin: currentTime(checkin),
 			almocoout: "",
 			almocoin: "",
 			checkout: "",
@@ -43,14 +53,14 @@ function salvarLunchout(matricula) {
 		for (let i = 0; i < ponto.length; i++) {
 			if (ponto[i].matricula == matricula && ponto[i].almocoout == "") {
 				let almocoout = new Date();
-				ponto[i].almocoout = almocoout;
+				ponto[i].almocoout = currentTime(almocoout);
 				console.log("Lunch-out realizado com sucesso");
 				fecharPonto(ponto);
 			}
 		}
 	}
 	if (existe.length == 0) {
-		console.log("Check-in não realizado")
+		console.log("Check-in não realizado");
 	}
 }
 
@@ -74,7 +84,7 @@ function salvarLunchin(matricula) {
 			for (let i = 0; i < ponto.length; i++) {
 				if (ponto[i].matricula == matricula && ponto[i].almocoin == "") {
 					let almocoin = new Date();
-					ponto[i].almocoin = almocoin;
+					ponto[i].almocoin = currentTime(almocoin);
 					console.log("Lunch-in realizado com sucesso");
 					fecharPonto(ponto);
 				}
@@ -82,7 +92,7 @@ function salvarLunchin(matricula) {
 		}
 	}
 	if (existe.length == 0) {
-		console.log("Check-in não realizado")
+		console.log("Check-in não realizado");
 	}
 }
 
@@ -104,7 +114,7 @@ function salvarCheckout(matricula) {
 					let checkout = new Date();
 					ponto[i].almocoout = "Não realizado";
 					ponto[i].almocoin = "Não realizado";
-					ponto[i].checkout = checkout;
+					ponto[i].checkout = currentTime(checkout);
 					console.log("Check-out realizado com sucesso");
 					fecharPonto(ponto);
 				}
@@ -113,7 +123,7 @@ function salvarCheckout(matricula) {
 			for (let i = 0; i < ponto.length; i++) {
 				if (ponto[i].matricula == matricula && ponto[i].checkout == "") {
 					let checkout = new Date();
-					ponto[i].checkout = checkout;
+					ponto[i].checkout = currentTime(checkout);
 					console.log("Check-out realizado com sucesso");
 					fecharPonto(ponto);
 				}
@@ -121,9 +131,11 @@ function salvarCheckout(matricula) {
 		}
 	}
 	if (existe.length == 0) {
-		console.log("Check-in não realizado")
+		console.log("Check-in não realizado");
 	}
 }
+
+
 
 module.exports = {
 	listarPonto,
