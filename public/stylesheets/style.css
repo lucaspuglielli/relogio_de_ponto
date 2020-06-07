@@ -40,11 +40,27 @@ main {
 	background-color: #ccc;
 }
 
-.pontobutton {
+.pontobutton, button {
 	padding: 20px;
 	border: 2px solid red;
 	border-radius: 20px;
 	background-color: darkblue;
 	text-decoration: none;
 	color: white;
+}
+
+.pontobutton:focus, button:focus{
+	outline: none;
+}
+
+input {
+	/* margin-bottom: 20px; */
+	height: 30px;
+	border-radius: 10px;
+	border: 2px solid cornflowerblue;
+	padding-left: 20px;
+}
+
+input:focus {
+	outline: none;
 }

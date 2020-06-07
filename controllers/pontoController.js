@@ -25,7 +25,7 @@ let pontoController = {
 	finalizarPonto: (req, res) => {
 		const { matricula } = req.body;
 		Ponto.salvarCheckout(matricula);
-		let {teste} = Ponto.listarPonto(matricula);
+		let teste = Ponto.listarPonto(matricula);
 		console.log(teste)
 		res.render("resumo", { title: "Resumo" , teste});
 	},
