@@ -18,7 +18,16 @@ function listarPonto(matricula) {
 }
 
 function currentTime(date) {
-	var newDate = new Date(date.getTime() - 180*60*1000);
+	var newDate = new Date(date.getTime() - /*date.getTimezoneOffset()*/ 180*60*1000);
+	let ano = newDate.getFullYear();
+	let mes = newDate.getMonth();
+	let dia = newDate.getDate();
+	let hora = newDate.getHours();
+	let min = newDate.getMinutes();
+	let seg = newDate.getSeconds();
+
+	newDate = `${hora}:${min}:${seg} - ${dia}/${mes + 1}/${ano}`
+
 	return newDate;
 }
 
