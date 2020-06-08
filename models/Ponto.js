@@ -13,7 +13,14 @@ function listarPonto(matricula) {
 	if (existe.length > 0){
 		return existe[existe.length - 1]
 	} else {
-		console.log("Ponto não encontrado")
+		let pontoVazio = {
+			matricula: "Não encontrada",
+			checkin: "",
+			almocoout: "",
+			almocoin: "",
+			checkout: "",
+		}
+		return pontoVazio
 	}
 }
 
