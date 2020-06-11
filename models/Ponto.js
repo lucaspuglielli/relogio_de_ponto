@@ -25,7 +25,7 @@ function listarPonto(matricula) {
 }
 
 function currentTime(date) {
-	var newDate = new Date(date.getTime() - /*date.getTimezoneOffset()*/ 180*60*1000);
+	let newDate = new Date(date.getTime() - /*date.getTimezoneOffset()*/ 180*60*1000);
 	let ano = newDate.getFullYear();
 	let mes = newDate.getMonth();
 	let dia = newDate.getDate();
@@ -33,7 +33,19 @@ function currentTime(date) {
 	let min = newDate.getMinutes();
 	let seg = newDate.getSeconds();
 
-	newDate = `${hora}:${min}:${seg} - ${dia}/${mes + 1}/${ano}`
+	function checkNumber(i) {
+		if (i < 10) {i = "0" + i};
+		return i;
+	}
+
+	mes = checkNumber(mes + 1);
+	dia = checkNumber(dia);
+	hora = checkNumber(hora);
+	min = checkNumber(min);
+	seg = checkNumber(seg);
+
+
+	newDate = `${hora}:${min}:${seg} - ${dia}/${mes}/${ano}`
 
 	return newDate;
 }

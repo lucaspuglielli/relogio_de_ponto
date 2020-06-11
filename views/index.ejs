@@ -4,20 +4,40 @@
 <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script>
+    function startTime() {
+      let date = new Date;
+      let today = new Date(date.getTime() - 180*60*1000);
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('txt').innerHTML =
+      h + ":" + m + ":" + s;
+      let t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};
+      return i;
+    }
+    </script>
 </head>
 
-<body>
+<body onload="startTime()">
 
   <nav></nav>
 
   <main>
     <div class="container">
       <div class="card">
-
-        <a href="/checkin" class="pontobutton">Check-in</a>
-        <a href="/lunchout" class="pontobutton">Lunch-out</a>
-        <a href="/lunchin" class="pontobutton">Lunch-in</a>
-        <a href="/checkout" class="pontobutton">Check-out</a>
+        <div id="txt"></div>
+        <div class="subcontainer">
+          <a href="/checkin" class="pontobutton">Check-in</a>
+          <a href="/lunchout" class="pontobutton">Lunch-out</a>
+          <a href="/lunchin" class="pontobutton">Lunch-in</a>
+          <a href="/checkout" class="pontobutton">Check-out</a>
+        </div>
 
       </div>
     </div>
